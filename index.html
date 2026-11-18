@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SUBTERRAIN</title>
+<meta name="description" content="Live rainfall, weather and air-quality dashboard for Agbara, Igbesa and Crawford University, Ogun State. Built with Vue 3 and Open-Meteo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Serif+Display&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="app" class="wrap" v-cloak>
+
+  <header>
+    <div class="eyebrow">Field log · Ado-Odo/Ota LGA, Ogun State</div>
+    <h1>SUBTERRAIN <span>· {{ town.name }}</span></h1>
+    <p class="lede">Live rainfall, weather and air quality for Agbara, Igbesa and the Crawford University area. Check before you commute, plan a site visit, or hang out the laundry.</p>
+  </header>
+
+  <footer>
+    <p>Weather and air-quality data by <a href="https://open-meteo.com/" rel="noopener">Open-Meteo.com</a> (CC BY 4.0). Forecast models, not on-site gauges.</p>
+    <p>Place coordinates are approximate, and the three spots are close together, so their numbers will often match. Built with Vue 3 by Ayomide Jimoh.</p>
+  </footer>
+</div>
+</body>
+</html>
