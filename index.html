@@ -17,12 +17,19 @@
   <header>
     <div class="eyebrow">Field log · Ado-Odo/Ota LGA, Ogun State</div>
     <h1>Ojú Ọjọ́ <span>· {{ town.name }}</span></h1>
-    <p class="lede">Live rainfall, weather and air quality for Agbara, Igbesa and the Crawford University area. Check before you commute, plan a site visit, or hang out the laundry.</p>
+    <p class="lede">Live rainfall, weather and air quality for Agbara, Igbesa and the Crawford University area.</p>
   </header>
+
+  <div class="toolbar">
+    <div class="towns" role="group" aria-label="Choose a town">
+      <button v-for="t in TOWNS" :key="t.id" :aria-pressed="t.id === townId" @click="townId = t.id">{{ t.name }}</button>
+    </div>
 
   <footer>
     <p> Built with Love and Cautiousness by Ayomide Jimoh.</p>
   </footer>
 </div>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
