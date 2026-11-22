@@ -1,3 +1,104 @@
+:root {
+  --bg: #1F1E24;
+  --panel: #2A2830;
+  --line: #433F50;
+  --ink: #ECE7F0;
+  --muted: #A9A2B8;
+  --accent: #A38CC2;     
+  --accent-2: #E2B44F;  
+  --alert: #E6B955;     
+  --on-accent: #1A1820; 
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #E9DEC6;
+    --panel: #F4ECDA;
+    --line: #D2C3A0;
+    --ink: #16233F;
+    --muted: #55607A;
+    --accent: #1D3A6E;    
+    --accent-2: #F08A24;  
+    --alert: #B04C07;   
+    --on-accent: #F4ECDA;
+    color-scheme: light;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Raleway", system-ui, sans-serif;
+  line-height: 1.5;
+}
+[v-cloak] { 
+    display: none; 
+}
+.wrap { 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    padding: 24px 16px 48px; 
+}
+a { 
+    color: var(--accent); 
+}
+button { 
+    font: inherit; 
+}
+:focus-visible { 
+    outline: 2px solid var(--alert); 
+    outline-offset: 2px; 
+}
+
+header {
+    margin-bottom: 24px;
+}
+.eyebrow, .label, .mono {
+  font-family: "DM Mono", ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+h1 {
+  font-family: "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.1;
+  margin: 6px 0 8px;
+}
+h1 span { 
+    color: var(--accent); 
+}
+.lede {
+    color: var(--muted);
+    margin: 0; 
+    max-width: 56ch; 
+}
+
+
+.grid { 
+    display: grid; 
+    gap: 16px; 
+    grid-template-columns: 1fr; 
+}
+@media (min-width: 820px) {
+  .grid { grid-template-columns: repeat(12, 1fr); }
+  .now { grid-column: span 5; }
+  .air { grid-column: span 7; }
+  .rain { grid-column: span 12; }
+  .hourly { grid-column: span 7; }
+  .geo { grid-column: span 5; }
+}
+.panel {
+  background: var(--panel); 
+  border: 1px solid var(--line);
+  border-radius: 12px; 
+  padding: 20px;
+  min-width: 0;
+}
+
 footer { 
     margin-top: 28px; 
     color: var(--muted); 
@@ -5,4 +106,31 @@ footer {
 }
 footer p {
     margin: 4px 0; 
+}
+.toolbar {
+  display: flex; 
+  flex-wrap: wrap; 
+    gap: 12px;
+  align-items: center;
+    justify-content: space-between;
+  margin: 20px 0 16px;
+}
+.towns { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 8px; 
+}
+.towns button {
+  background: transparent; 
+    color: var(--ink);
+  border: 1px solid var(--line); 
+    border-radius: 999px;
+  padding: 8px 16px; 
+    cursor: pointer; 
+    font-weight: 500;
+}
+.towns button[aria-pressed="true"] {
+  background: var(--accent); 
+    border-color: var(--accent); 
+    color: var(--on-accent);
 }
