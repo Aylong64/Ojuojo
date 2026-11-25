@@ -24,6 +24,43 @@
     <div class="towns" role="group" aria-label="Choose a town">
       <button v-for="t in TOWNS" :key="t.id" :aria-pressed="t.id === townId" @click="townId = t.id">{{ t.name }}</button>
     </div>
+
+      <section class="panel now" :class="{ skeleton: !cur }" aria-labelledby="now-h">
+      <h2 class="label" id="now-h">Right now in {{ town.name }}</h2>
+      <p class="big">{{ fmt(cur && cur.temperature_2m) }}<small>°C</small></p>
+      <p class="cond">{{ cur ? describe(cur.weather_code) : 'Loading…' }}</p>
+      <dl class="stats">
+        <div><dt>Feels like</dt><dd>{{ fmt(cur && cur.apparent_temperature) }}°C</dd></div>
+        <div><dt>Humidity</dt><dd>{{ fmt(cur && cur.relative_humidity_2m) }}%</dd></div>
+        <div><dt>Wind</dt><dd>{{ fmt(cur && cur.wind_speed_10m) }} km/h</dd></div>
+        <div><dt>Rain this hour</dt><dd>{{ fmt(cur && cur.precipitation, 1) }} mm</dd></div>
+      </dl>
+    </section>
+
+
+    <section class="panel air" :class="{ skeleton: !air }" aria-labelledby="air-h">
+      <h2 class="label" id="air-h">Air quality</h2>
+      <p class="big">{{ fmt(aqi) }} <small>US AQI</small></p>
+      <p class="cond">
+        <span class="pill" v-if="band" :style="{ background: band.color }">{{ band.label }}</span>
+        <span v-else>Loading…</span>
+      </p>
+      <dl class="stats">
+        <div><dt>PM2.5</dt><dd>{{ fmt(air && air.current.pm2_5, 1) }} µg/m³</dd></div>
+        <div><dt>PM10</dt><dd>{{ fmt(air && air.current.pm10, 1) }} µg/m³</dd></div>
+        <div><dt>Nitrogen dioxide</dt><dd>{{ fmt(air && air.current.nitrogen_dioxide, 1) }} µg/m³</dd></div>
+      </dl>
+      <div class="spaced" v-if="airHours.length">
+        <p class="label">Next 24 hours (US AQI)</p>
+        <ol class="strip" aria-label="Hourly air quality for the next 24 hours">
+          <li v-for="(h, i) in airHours" :key="h.time">
+            <div class="h" :style="{ background: h.band ? h.band.color : 'var(--line)' }"
+                 :title="fmtHour(h.time) + ': AQI ' + fmt(h.value) + (h.band ? ' (' + h.band.label + ')' : '')"></div>
+            <span class="tick">{{ i % 6 === 0 ? fmtHour(h.time) : '' }}</span>
+          </li>
+        </ol>
+      </div>
+    </section>
     
 <section class="panel rain" :class="{ skeleton: !days.length }" aria-labelledby="rain-h">
       <h2 class="label" id="rain-h">Seven-day rainfall (mm per day)</h2>
