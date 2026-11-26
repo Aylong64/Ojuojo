@@ -10,6 +10,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Serif+Display&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+  
+ <script>
+  (function () {
+    var theme = 'dark';
+    try {
+      var saved = localStorage.getItem('subterrain-theme');
+      if (saved === 'light' || saved === 'dark') {
+        theme = saved;
+      } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        theme = 'light';
+      }
+    } catch (e) {
+    }
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
 
 </head>
 <body>
@@ -25,6 +41,13 @@
     <div class="towns" role="group" aria-label="Choose a town">
       <button v-for="t in TOWNS" :key="t.id" :aria-pressed="t.id === townId" @click="townId = t.id">{{ t.name }}</button>
     </div>
+
+    <p class="notice" role="alert" v-if="errors.weather">
+    Couldn't load the weather data ({{ errors.weather }}). <button @click="load">Try again</button>
+  </p>
+  <p class="notice" role="alert" v-if="errors.air">
+    Couldn't load air quality ({{ errors.air }}). <button @click="load">Try again</button>
+  </p>
 
       <section class="panel now" :class="{ skeleton: !cur }" aria-labelledby="now-h">
       <h2 class="label" id="now-h">Right now in {{ town.name }}</h2>
