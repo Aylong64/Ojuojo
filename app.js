@@ -88,6 +88,8 @@ createApp({
 
       air: null,
 
+      errors: { weather: null, air: null },
+
 
   computed: {
     town() {
@@ -204,5 +206,20 @@ createApp({
         getJson(airUrl(lat, lon)),
       ]);
 
+       if (askedFor !== this.townId) return;
+
+      if (w.status === 'fulfilled') {
+        this.weather = w.value;
+        this.errors.weather = null;
+      } else {
+        this.errors.weather = w.reason.message;
+      }
+
+      if (a.status === 'fulfilled') {
+        this.air = a.value;
+        this.errors.air = null;
+      } else {
+        this.errors.air = a.reason.message;
+      }
      
  
