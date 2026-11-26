@@ -72,6 +72,17 @@ function airUrl(lat, lon) {
   });
 }
 
+const REFRESH_MS = 10 * 60 * 1000;
+function savedTownId() {
+  try {
+    const saved = localStorage.getItem('subterrain-town');
+    if (TOWNS.some((t) => t.id === saved)) return saved;
+  } catch (e) {
+    // storage not available, no problem
+  }
+  return TOWNS[0].id;
+}
+
   return TOWNS[0].id;
 }
 
@@ -89,6 +100,9 @@ createApp({
       air: null,
 
       errors: { weather: null, air: null },
+
+       updatedAt: '',
+       timer: null,
 
 
   computed: {
@@ -221,5 +235,23 @@ createApp({
       } else {
         this.errors.air = a.reason.message;
       }
-     
+
+      if (w.status === 'fulfilled' || a.status === 'fulfilled') {
+        this.updatedAt = new Date().toLocaleTimeString('en-NG', { hour: 'numeric', minute: '2-digit' });
+      }
+      this.loading = false;
+    },
+  },
+
+
+  mounted() {
+    applyTheme(this.theme); 
+    this.load();
+    this.timer = setInterval(() => this.load(), REFRESH_MS);
+  },
+
+  beforeUnmount() {
+    clearInterval(this.timer);
+  },
+}).mount('#app');
  
