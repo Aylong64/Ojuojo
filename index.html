@@ -39,8 +39,15 @@
 
   <div class="toolbar">
     <div class="towns" role="group" aria-label="Choose a town">
-      <button v-for="t in TOWNS" :key="t.id" :aria-pressed="t.id === townId" @click="townId = t.id">{{ t.name }}</button>
+      <button v-for="t in TOWNS" :key="t.id" :aria-pressed="t.id === townId" @click="townId = t.id">
+        {{ t.name }}
+      </button>
     </div>
+    <div class="actions">
+     <div class="refresh" aria-live="polite">
+        <span class="mono">{{ loading ? 'Updating…' : (updatedAt ? 'Updated ' + updatedAt : '') }}</span>
+        <button @click="load" :disabled="loading">Refresh</button>
+      </div>
 
     <p class="notice" role="alert" v-if="errors.weather">
     Couldn't load the weather data ({{ errors.weather }}). <button @click="load">Try again</button>
