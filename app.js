@@ -83,6 +83,18 @@ function savedTownId() {
   return TOWNS[0].id;
 }
 
+const THEME_COLORS = { dark: '#1F1E24', light: '#E9DEC6' };
+function applyTheme(theme, remember = false) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const bar = document.querySelector('meta[name="theme-color"]');
+  if (bar) bar.setAttribute('content', THEME_COLORS[theme]);
+  if (!remember) return;
+  try {
+    localStorage.setItem('subterrain-theme', theme);
+  } catch (e) {
+  }
+}
+
 createApp({
   data() {
     return {
@@ -100,6 +112,8 @@ createApp({
 
       updatedAt: '',
       timer: null,
+
+      theme: document.documentElement.getAttribute('data-theme') || 'dark',
     };
   },
 
@@ -207,6 +221,11 @@ createApp({
     fmt,
     fmtHour,
 
+    toggleTheme() {
+      this.theme = this.theme === 'dark' ? 'light' : 'dark';
+      applyTheme(this.theme, true);
+    },
+
     async load() {
       const askedFor = this.townId;
       const { lat, lon } = this.town;
@@ -241,6 +260,7 @@ createApp({
   },
 
   mounted() {
+    applyTheme(this.theme);
     this.load();
     this.timer = setInterval(() => this.load(), REFRESH_MS);
   },
