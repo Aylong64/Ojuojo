@@ -18,7 +18,8 @@
       var saved = localStorage.getItem('subterrain-theme');
       if (saved === 'light' || saved === 'dark') {
         theme = saved;
-      } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      } 
+      else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
         theme = 'light';
       }
     } catch (e) {
