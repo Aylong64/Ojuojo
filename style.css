@@ -331,3 +331,31 @@ dl.stats dd {
 .geo p:last-child {
   margin-bottom: 0;
 }
+
+:root[data-theme="light"] {
+  --bg: #E9DEC6;
+  --panel: #F4ECDA;
+  --line: #D2C3A0;
+  --ink: #16233F;
+  --muted: #55607A;
+  --accent: #1D3A6E; 
+  --accent-2: #F08A24; 
+  --alert: #B04C07; 
+  --on-accent: #F4ECDA; 
+  color-scheme: light;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.theme-toggle {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
