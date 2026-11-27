@@ -31,8 +31,12 @@ body {
 a {
   color: var(--accent);
 }
+html {
+  -webkit-text-size-adjust: 100%;
+}
 button {
   font: inherit;
+  touch-action: manipulation;
 }
 :focus-visible {
   outline: 2px solid var(--alert);
@@ -358,4 +362,55 @@ dl.stats dd {
   border-radius: 8px;
   padding: 6px 12px;
   cursor: pointer;
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .wrap {
+    padding: 16px 12px 40px;
+  }
+  .panel {
+    padding: 16px;
+  }
+
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .towns button {
+    flex: 1 1 auto;
+    min-height: 44px;
+    padding: 10px 12px;
+  }
+  .actions {
+    justify-content: space-between;
+  }
+  .refresh button, .theme-toggle {
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+
+
+  .bars {
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .col {
+    min-width: 58px;
+  }
+  .rain .label::after {
+    content: " · swipe sideways for all 7 days";
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+
+  .strip {
+    gap: 1px;
+  }
+  .strip .tick {
+    font-size: 0.55rem;
+  }
 }
