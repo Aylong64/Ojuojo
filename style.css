@@ -323,3 +323,11 @@ dl.stats dd {
   opacity: 0.4;
 }
 
+.geo p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.geo p:last-child {
+  margin-bottom: 0;
+}
