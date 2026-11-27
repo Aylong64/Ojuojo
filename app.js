@@ -39,7 +39,7 @@ function weatherUrl(lat, lon) {
   });
 }
 
-const HEAVY_MM = 20; 
+const HEAVY_MM = 20;
 
 function fmtHour(time) {
   const hour = Number(time.slice(11, 13));
@@ -73,15 +73,13 @@ function airUrl(lat, lon) {
 }
 
 const REFRESH_MS = 10 * 60 * 1000;
+
 function savedTownId() {
   try {
     const saved = localStorage.getItem('subterrain-town');
     if (TOWNS.some((t) => t.id === saved)) return saved;
   } catch (e) {
   }
-  return TOWNS[0].id;
-}
-
   return TOWNS[0].id;
 }
 
@@ -100,9 +98,10 @@ createApp({
 
       errors: { weather: null, air: null },
 
-       updatedAt: '',
-       timer: null,
-
+      updatedAt: '',
+      timer: null,
+    };
+  },
 
   computed: {
     town() {
@@ -138,7 +137,6 @@ createApp({
       return this.days.reduce((sum, d) => sum + d.rain, 0);
     },
 
-
     heavyDays() {
       return this.days.filter((d) => d.heavy).length;
     },
@@ -167,7 +165,7 @@ createApp({
       if (firstWet.time === this.hours[0].time) return 'Rain is likely right now or within the hour.';
       return 'Rain expected from about ' + fmtHour(firstWet.time) + '.';
     },
-    
+
     aqi() {
       return this.air ? this.air.current.us_aqi : null;
     },
@@ -175,7 +173,7 @@ createApp({
     band() {
       return aqiBand(this.aqi);
     },
-    
+
     airHours() {
       if (!this.air) return [];
       const h = this.air.hourly;
@@ -219,7 +217,7 @@ createApp({
         getJson(airUrl(lat, lon)),
       ]);
 
-       if (askedFor !== this.townId) return;
+      if (askedFor !== this.townId) return;
 
       if (w.status === 'fulfilled') {
         this.weather = w.value;
@@ -242,9 +240,7 @@ createApp({
     },
   },
 
-
   mounted() {
-    applyTheme(this.theme); 
     this.load();
     this.timer = setInterval(() => this.load(), REFRESH_MS);
   },
@@ -253,4 +249,3 @@ createApp({
     clearInterval(this.timer);
   },
 }).mount('#app');
- 
