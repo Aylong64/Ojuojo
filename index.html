@@ -49,15 +49,19 @@
         <span class="mono">{{ loading ? 'Updating…' : (updatedAt ? 'Updated ' + updatedAt : '') }}</span>
         <button @click="load" :disabled="loading">Refresh</button>
       </div>
+      <button class="theme-toggle" @click="toggleTheme">{{ theme === 'dark' ? 'Light mode' : 'Dark mode' }}</button>
+    </div>
+  </div>
 
-    <p class="notice" role="alert" v-if="errors.weather">
+  <p class="notice" role="alert" v-if="errors.weather">
     Couldn't load the weather data ({{ errors.weather }}). <button @click="load">Try again</button>
   </p>
   <p class="notice" role="alert" v-if="errors.air">
     Couldn't load air quality ({{ errors.air }}). <button @click="load">Try again</button>
   </p>
 
-      <section class="panel now" :class="{ skeleton: !cur }" aria-labelledby="now-h">
+  <main class="grid">
+    <section class="panel now" :class="{ skeleton: !cur }" aria-labelledby="now-h">
       <h2 class="label" id="now-h">Right now in {{ town.name }}</h2>
       <p class="big">{{ fmt(cur && cur.temperature_2m) }}<small>°C</small></p>
       <p class="cond">{{ cur ? describe(cur.weather_code) : 'Loading…' }}</p>
