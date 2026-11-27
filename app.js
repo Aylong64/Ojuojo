@@ -78,7 +78,6 @@ function savedTownId() {
     const saved = localStorage.getItem('subterrain-town');
     if (TOWNS.some((t) => t.id === saved)) return saved;
   } catch (e) {
-    // storage not available, no problem
   }
   return TOWNS[0].id;
 }
