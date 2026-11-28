@@ -51,15 +51,16 @@
         {{ t.name }}
       </button>
     </div>
-    <div class="actions">
+  <div class="actions">
      <div class="refresh" aria-live="polite">
         <span class="mono">{{ loading ? 'Updating…' : (updatedAt ? 'Updated ' + updatedAt : '') }}</span>
         <button @click="load" :disabled="loading">Refresh</button>
       </div>
-      <button class="theme-toggle" @click="toggleTheme">{{ theme === 'dark' ? 'Light mode' : 'Dark mode' }}</button>
+      <button class="theme-toggle" @click="toggleTheme"
+        :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+        :title="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'">{{ theme === 'dark' ? '☀️' : '🌙' }}</button>
     </div>
   </div>
-
   <p class="notice" role="alert" v-if="errors.weather">
     Couldn't load the weather data ({{ errors.weather }}). <button @click="load">Try again</button>
   </p>
